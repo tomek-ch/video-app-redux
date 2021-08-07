@@ -36,7 +36,9 @@ function NewVideoForm({ addVideo }: Props) {
           />
         </Col>
         <Col>
-          <Button disabled={!text}>Add</Button>
+          <Button color="primary" disabled={!text}>
+            Add
+          </Button>
         </Col>
       </Row>
       {error && <Alert color="danger">{error}</Alert>}

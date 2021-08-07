@@ -20,8 +20,13 @@ function VideoCard({
       <p>Likes: {likes}</p>
       <img src={thumbnail} alt={`Thumbnail for ${title}`} />
       <p>Added: {formatDate(timestamp)}</p>
-      <Button onClick={() => removeVideo(id)}>Delete</Button>
-      <Button onClick={() => toggleFavorite(id)}>
+      <Button onClick={() => removeVideo(id)} color="danger">
+        Delete
+      </Button>
+      <Button
+        onClick={() => toggleFavorite(id)}
+        color={favorite ? "secondary" : "success"}
+      >
         {favorite ? "Remove from favorites" : "Add to favorites"}
       </Button>
     </div>

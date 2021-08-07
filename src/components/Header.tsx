@@ -11,7 +11,9 @@ function Header({ loadDemoData, wipeData }: Props) {
       <h1>Video App</h1>
       <Nav>
         <Button onClick={loadDemoData}>Load demo videos</Button>
-        <Button onClick={wipeData}>Delete all videos</Button>
+        <Button color="danger" onClick={wipeData}>
+          Delete all videos
+        </Button>
       </Nav>
     </header>
   );
