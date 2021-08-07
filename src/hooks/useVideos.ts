@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Video from "../types/video";
+import demoVideos from "../utils/demoVideos";
 
 function useVideos() {
   const localData = localStorage.getItem("videos");
@@ -30,11 +31,14 @@ function useVideos() {
     );
   };
 
+  const loadDemoData = () => setVideos(demoVideos);
+
   return {
     videos,
     addVideo,
     removeVideo,
     toggleFavorite,
+    loadDemoData,
   };
 }
 
