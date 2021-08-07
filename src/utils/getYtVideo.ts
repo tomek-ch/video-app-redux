@@ -26,6 +26,10 @@ async function getYtVideo(text: string) {
   const id = getId(text);
   const video = await fetchFromYt(id);
 
+  if (!video) {
+    return null;
+  }
+
   const data = {
     id: video.id,
     title: video.snippet.title,

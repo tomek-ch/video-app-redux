@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Col, Form, Input, Label, Row } from "reactstrap";
+import { Alert, Button, Col, Form, Input, Label, Row } from "reactstrap";
 import getYtVideo from "../utils/getYtVideo";
 import Video from "../types/video";
 
@@ -9,12 +9,19 @@ interface Props {
 
 function NewVideoForm({ addVideo }: Props) {
   const [text, setText] = useState("");
+  const [error, setError] = useState("");
 
   return (
     <Form
       onSubmit={async (e) => {
         e.preventDefault();
         const video = await getYtVideo(text);
+
+        if (!video) {
+          return setError("Could not find that video");
+        }
+
+        setError("");
         addVideo(video);
       }}
     >
@@ -32,6 +39,7 @@ function NewVideoForm({ addVideo }: Props) {
           <Button disabled={!text}>Add</Button>
         </Col>
       </Row>
+      {error && <Alert color="danger">{error}</Alert>}
     </Form>
   );
 }
