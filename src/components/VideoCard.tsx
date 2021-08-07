@@ -1,4 +1,4 @@
-import { Button, Input, Label } from "reactstrap";
+import { Button, Card, Input, Label } from "reactstrap";
 import Video from "../types/video";
 import formatDate from "../utils/formatDate";
 
@@ -14,7 +14,7 @@ function VideoCard({
   toggleFavorite,
 }: Props) {
   return (
-    <div>
+    <Card>
       <h2>{title}</h2>
       <p>Views: {views}</p>
       <p>Likes: {likes}</p>
@@ -31,7 +31,7 @@ function VideoCard({
         />
         Favorite
       </Label>
-    </div>
+    </Card>
   );
 }
 
