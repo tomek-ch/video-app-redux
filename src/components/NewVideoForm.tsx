@@ -1,17 +1,21 @@
 import { useState } from "react";
 import { Button, Col, Form, Input, Label, Row } from "reactstrap";
-import useYtVideo from "../hooks/useYtVideo";
+import getYtVideo from "../utils/getYtVideo";
+import Video from "../types/video";
 
-function NewVideoForm() {
+interface Props {
+  addVideo: (newVideo: Video) => void;
+}
+
+function NewVideoForm({ addVideo }: Props) {
   const [text, setText] = useState("");
-  const [video, handleVideo] = useYtVideo();
-  console.log({ video });
 
   return (
     <Form
       onSubmit={async (e) => {
         e.preventDefault();
-        handleVideo(text);
+        const video = await getYtVideo(text);
+        addVideo(video);
       }}
     >
       <Label for="video">Video url or id</Label>
