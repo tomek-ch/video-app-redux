@@ -1,14 +1,11 @@
-import "./App.css";
-import { Button, Container, Form, Input, Label } from "reactstrap";
+import { Container } from "reactstrap";
+import NewVideoForm from "./components/NewVideoForm";
 
 function App() {
   return (
     <Container>
-      <Form>
-        <Label for="video">Video url or id</Label>
-        <Input id="id" placeholder="https://youtube.com/..." />
-        <Button>Add</Button>
-      </Form>
+      <h1>Video App</h1>
+      <NewVideoForm />
     </Container>
   );
 }
