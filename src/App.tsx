@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { Button, Container } from "reactstrap";
+import { Container } from "reactstrap";
+import Header from "./components/Header";
 import NewVideoForm from "./components/NewVideoForm";
 import VideoCard from "./components/VideoCard";
 import useVideos from "./hooks/useVideos";
@@ -15,8 +16,7 @@ function App() {
 
   return (
     <Container>
-      <h1>Video App</h1>
-      <Button onClick={loadDemoData}>Load demo videos</Button>
+      <Header {...{ loadDemoData }} />
       <NewVideoForm addVideo={addVideo} />
       {videos.map((video) => (
         <VideoCard key={video.id} {...{ video, removeVideo, toggleFavorite }} />
