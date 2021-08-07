@@ -36,12 +36,15 @@ function useVideos() {
 
   const loadDemoData = () => setVideos(demoVideos);
 
+  const wipeData = () => setVideos([]);
+
   return {
     videos,
     addVideo,
     removeVideo,
     toggleFavorite,
     loadDemoData,
+    wipeData,
   };
 }
 

@@ -6,8 +6,14 @@ import VideoCard from "./components/VideoCard";
 import useVideos from "./hooks/useVideos";
 
 function App() {
-  const { videos, addVideo, removeVideo, toggleFavorite, loadDemoData } =
-    useVideos();
+  const {
+    videos,
+    addVideo,
+    removeVideo,
+    toggleFavorite,
+    loadDemoData,
+    wipeData,
+  } = useVideos();
 
   useEffect(() => {
     const data = JSON.stringify(videos);
@@ -16,7 +22,7 @@ function App() {
 
   return (
     <Container>
-      <Header {...{ loadDemoData }} />
+      <Header {...{ loadDemoData, wipeData }} />
       <NewVideoForm addVideo={addVideo} />
       {videos.map((video) => (
         <VideoCard key={video.id} {...{ video, removeVideo, toggleFavorite }} />

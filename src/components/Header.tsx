@@ -1,14 +1,18 @@
-import Nav from "./Nav";
+import { Button, Nav } from "reactstrap";
 
 interface Props {
   loadDemoData: () => void;
+  wipeData: () => void;
 }
 
-function Header({ loadDemoData }: Props) {
+function Header({ loadDemoData, wipeData }: Props) {
   return (
     <header>
       <h1>Video App</h1>
-      <Nav {...{ loadDemoData }} />
+      <Nav>
+        <Button onClick={loadDemoData}>Load demo videos</Button>
+        <Button onClick={wipeData}>Delete all videos</Button>
+      </Nav>
     </header>
   );
 }
