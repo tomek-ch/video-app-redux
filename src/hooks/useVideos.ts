@@ -9,9 +9,12 @@ function useVideos() {
 
   const addVideo = (newVid: Video) => {
     const videoExists = videos.find(({ id }) => id === newVid.id);
-    if (!videoExists) {
-      setVideos((prev) => [newVid, ...prev]);
+    if (videoExists) {
+      return false;
     }
+
+    setVideos((prev) => [newVid, ...prev]);
+    return true;
   };
 
   const removeVideo = (deleteId: string) => {

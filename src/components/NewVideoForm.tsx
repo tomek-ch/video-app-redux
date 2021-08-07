@@ -4,7 +4,7 @@ import getYtVideo from "../utils/getYtVideo";
 import Video from "../types/video";
 
 interface Props {
-  addVideo: (newVideo: Video) => void;
+  addVideo: (newVideo: Video) => boolean;
 }
 
 function NewVideoForm({ addVideo }: Props) {
@@ -21,8 +21,8 @@ function NewVideoForm({ addVideo }: Props) {
           return setError("Could not find that video");
         }
 
-        setError("");
-        addVideo(video);
+        const addedSuccessfully = addVideo(video);
+        setError(addedSuccessfully ? "" : "Video already in library");
       }}
     >
       <Label for="video">Video url or id</Label>
