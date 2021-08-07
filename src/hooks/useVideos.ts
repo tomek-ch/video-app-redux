@@ -6,12 +6,14 @@ import getVideos from "../utils/getVideos";
 function useVideos() {
   const [videos, setVideos] = useState<Video[]>([]);
 
+  // Load local data
   useEffect(() => {
     const localData = localStorage.getItem("videos");
     const parsedData = localData ? JSON.parse(localData) : [];
     getVideos(parsedData).then(setVideos);
   }, []);
 
+  // Save data locally
   useEffect(() => {
     const ids = videos.map(({ id }) => id);
     const data = JSON.stringify(ids);
