@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useEffect } from "react";
 import { Container } from "reactstrap";
 import Header from "./components/Header";
@@ -15,16 +16,26 @@ function App() {
     wipeData,
   } = useVideos();
 
+  const [favoritesOnly, setFavoritesOnly] = useState(false);
+  const listToDisplay = favoritesOnly
+    ? videos.filter(({ favorite }) => favorite)
+    : videos;
+
   useEffect(() => {
     const data = JSON.stringify(videos);
     localStorage.setItem("videos", data);
   }, [videos]);
 
+  const toggleFavFilter = () => setFavoritesOnly((prev) => !prev);
+
   return (
     <Container>
-      <Header {...{ loadDemoData, wipeData }} />
+      <Header
+        favFilter={{ value: favoritesOnly, toggle: toggleFavFilter }}
+        data={{ load: loadDemoData, wipe: wipeData }}
+      />
       <NewVideoForm addVideo={addVideo} />
-      {videos.map((video) => (
+      {listToDisplay.map((video) => (
         <VideoCard key={video.id} {...{ video, removeVideo, toggleFavorite }} />
       ))}
     </Container>
