@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Container } from "reactstrap";
 import NewVideoForm from "./components/NewVideoForm";
 import VideoCard from "./components/VideoCard";
@@ -5,6 +6,11 @@ import useVideos from "./hooks/useVideos";
 
 function App() {
   const { videos, addVideo, removeVideo } = useVideos();
+
+  useEffect(() => {
+    const data = JSON.stringify(videos);
+    localStorage.setItem("videos", data);
+  }, [videos]);
 
   return (
     <Container>
