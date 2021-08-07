@@ -33,6 +33,7 @@ async function getYtVideo(text: string) {
     likes: video.statistics.likeCount,
     thumbnail: video.snippet.thumbnails.standard.url,
     timestamp: Date.now(),
+    favorite: false,
   };
   return data;
 }

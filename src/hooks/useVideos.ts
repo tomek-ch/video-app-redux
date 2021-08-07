@@ -17,10 +17,24 @@ function useVideos() {
     setVideos((prev) => prev.filter(({ id }) => id !== deleteId));
   };
 
+  const toggleFavorite = (favId: string) => {
+    setVideos((prev) =>
+      prev.map((vid) =>
+        vid.id === favId
+          ? {
+              ...vid,
+              favorite: !vid.favorite,
+            }
+          : vid
+      )
+    );
+  };
+
   return {
     videos,
     addVideo,
     removeVideo,
+    toggleFavorite,
   };
 }
 
