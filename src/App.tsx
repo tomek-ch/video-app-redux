@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useEffect } from "react";
 import { Container } from "reactstrap";
 import Header from "./components/Header";
 import NewVideoForm from "./components/NewVideoForm";
@@ -20,11 +19,6 @@ function App() {
   const listToDisplay = favoritesOnly
     ? videos.filter(({ favorite }) => favorite)
     : videos;
-
-  useEffect(() => {
-    const data = JSON.stringify(videos);
-    localStorage.setItem("videos", data);
-  }, [videos]);
 
   const toggleFavFilter = () => setFavoritesOnly((prev) => !prev);
 

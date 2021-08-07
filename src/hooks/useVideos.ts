@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Video from "../types/video";
 import demoVideos from "../utils/demoVideos";
+import getVideos from "../utils/getVideos";
 
 function useVideos() {
-  const localData = localStorage.getItem("videos");
-  const parsedData = localData ? JSON.parse(localData) : [];
-  const [videos, setVideos] = useState<Video[]>(parsedData);
+  const [videos, setVideos] = useState<Video[]>([]);
+
+  useEffect(() => {
+    const localData = localStorage.getItem("videos");
+    const parsedData = localData ? JSON.parse(localData) : [];
+    getVideos(parsedData).then(setVideos);
+  }, []);
+
+  useEffect(() => {
+    const ids = videos.map(({ id }) => id);
+    const data = JSON.stringify(ids);
+    localStorage.setItem("videos", data);
+  }, [videos]);
 
   const addVideo = (newVid: Video) => {
     const videoExists = videos.find(({ id }) => id === newVid.id);
@@ -34,7 +45,10 @@ function useVideos() {
     );
   };
 
-  const loadDemoData = () => setVideos(demoVideos);
+  const loadDemoData = async () => {
+    const videos = await getVideos(demoVideos);
+    setVideos(videos);
+  };
 
   const wipeData = () => setVideos([]);
 
