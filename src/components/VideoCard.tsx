@@ -1,4 +1,4 @@
-import { Button } from "reactstrap";
+import { Button, Input, Label } from "reactstrap";
 import Video from "../types/video";
 import formatDate from "../utils/formatDate";
 
@@ -23,12 +23,14 @@ function VideoCard({
       <Button onClick={() => removeVideo(id)} color="danger">
         Delete
       </Button>
-      <Button
-        onClick={() => toggleFavorite(id)}
-        color={favorite ? "secondary" : "success"}
-      >
-        {favorite ? "Remove from favorites" : "Add to favorites"}
-      </Button>
+      <Label>
+        <Input
+          type="checkbox"
+          checked={favorite}
+          onChange={() => toggleFavorite(id)}
+        />
+        Favorite
+      </Label>
     </div>
   );
 }
