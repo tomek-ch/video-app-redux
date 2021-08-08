@@ -6,14 +6,14 @@ import getVideos from "../utils/vidsFromArray";
 function useVideos() {
   const [videos, setVideos] = useState<Video[]>([]);
 
-  // Load local data
+  // *** Local sync ***
+
   useEffect(() => {
     const localData = localStorage.getItem("videos");
     const parsedData = localData ? JSON.parse(localData) : [];
     getVideos(parsedData).then(setVideos);
   }, []);
 
-  // Save data locally
   useEffect(() => {
     const vids = videos.map(({ id, favorite, timestamp }) => ({
       id,
@@ -23,6 +23,8 @@ function useVideos() {
     const data = JSON.stringify(vids);
     localStorage.setItem("videos", data);
   }, [videos]);
+
+  // *** CRUD ***
 
   const addVideo = (newVid: Video) => {
     const videoExists = videos.find(({ id }) => id === newVid.id);
@@ -51,6 +53,8 @@ function useVideos() {
     );
   };
 
+  // *** Wipe and load data ***
+
   const loadDemoData = async () => {
     const videos = await getVideos(demoVideos);
     setVideos(videos);
@@ -58,12 +62,15 @@ function useVideos() {
 
   const wipeData = () => setVideos([]);
 
+  // *** Filter and sort ***
+
   const [favoritesOnly, setFavoritesOnly] = useState(false);
   const [oldestFirst, setOldestFirst] = useState(false);
 
   const listToDisplay = favoritesOnly
     ? videos.filter(({ favorite }) => favorite)
-    : [...videos];
+    : // Spread to prevent mutation of state by sort()
+      [...videos];
 
   if (oldestFirst) {
     listToDisplay.sort((a, b) => a.timestamp - b.timestamp);
