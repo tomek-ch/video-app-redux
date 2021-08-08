@@ -9,7 +9,10 @@ function PagesList() {
         <PaginationItem key={`page-${page}`} active={currentPage === page}>
           <PaginationLink
             onClick={() => {
-              setCurrentPage(page);
+              if (currentPage !== page) {
+                setCurrentPage(page);
+                window.scrollTo(0, 0);
+              }
             }}
           >
             {page + 1}
