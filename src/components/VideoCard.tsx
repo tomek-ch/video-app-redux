@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button, Card, Input, Label } from "reactstrap";
 import { useVideosContext } from "../context/VideosContext";
 import Video from "../types/video";
@@ -13,6 +14,8 @@ function VideoCard({
   video: { id, title, views, likes, timestamp, favorite },
 }: Props) {
   const { removeVideo, toggleFavorite } = useVideosContext();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const toggleModal = () => setIsModalOpen((prev) => !prev);
 
   return (
     <Card>
@@ -28,9 +31,12 @@ function VideoCard({
         />
         Favorite
       </Label>
-      <VideoModal video={video} />
+      <VideoModal {...{ video, toggleModal, isModalOpen }} />
       <Button onClick={() => removeVideo(id)} color="danger">
         Delete
+      </Button>
+      <Button onClick={toggleModal} color="primary">
+        Watch
       </Button>
     </Card>
   );
