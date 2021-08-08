@@ -19,8 +19,8 @@ function VideoCard({
       <h2>{title}</h2>
       <p>Views: {views || "Not available"}</p>
       <p>Likes: {likes}</p>
-      <VideoModal video={video} />
       <p>Added: {formatDate(timestamp)}</p>
+      <VideoModal video={video} />
       <Button onClick={() => removeVideo(id)} color="danger">
         Delete
       </Button>
