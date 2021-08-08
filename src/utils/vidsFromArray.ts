@@ -1,9 +1,9 @@
 import Video from "../types/video";
-import getYtVideo from "./getYtVideo";
+import getVideo from "./getVideo";
 
 async function getVideos(arr: string[]) {
   try {
-    const result = await Promise.all(arr.map((id) => getYtVideo(id)));
+    const result = await Promise.all(arr.map((id) => getVideo(id)));
     return result.filter((vid) => vid) as Video[];
   } catch {
     return [];

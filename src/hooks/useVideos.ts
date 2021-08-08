@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Video from "../types/video";
 import demoVideos from "../utils/demoVideos";
-import getVideos from "../utils/getVideos";
+import getVideos from "../utils/vidsFromArray";
 
 function useVideos() {
   const [videos, setVideos] = useState<Video[]>([]);

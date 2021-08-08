@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Alert, Button, Col, Form, Input, Label, Row } from "reactstrap";
-import getYtVideo from "../utils/getYtVideo";
 import Video from "../types/video";
+import getVideo from "../utils/getVideo";
 
 interface Props {
   addVideo: (newVideo: Video) => boolean;
@@ -15,7 +15,7 @@ function NewVideoForm({ addVideo }: Props) {
     <Form
       onSubmit={async (e) => {
         e.preventDefault();
-        const video = await getYtVideo(text);
+        const video = await getVideo(text);
 
         if (!video) {
           return setError("Could not find that video");

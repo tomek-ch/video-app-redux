@@ -16,7 +16,7 @@ function VideoCard({
   return (
     <Card>
       <h2>{title}</h2>
-      <p>Views: {views}</p>
+      <p>Views: {views || "Not available"}</p>
       <p>Likes: {likes}</p>
       <img src={thumbnail} alt={`Thumbnail for ${title}`} />
       <p>Added: {formatDate(timestamp)}</p>
