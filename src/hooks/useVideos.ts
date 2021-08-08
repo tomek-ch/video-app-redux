@@ -80,7 +80,7 @@ function useVideos() {
 
   // *** Pagination ***
 
-  const pagesCount = Math.ceil(videos.length / 5);
+  const pagesCount = Math.ceil(listToDisplay.length / 5);
   const [currentPage, setCurrentPage] = useState(0);
   const currentPageVideos = listToDisplay.slice(
     currentPage * 5,
