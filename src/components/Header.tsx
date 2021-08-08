@@ -1,4 +1,5 @@
 import { Button, Input, Label, Nav } from "reactstrap";
+import SortDropdown from "./SortDropdown";
 
 interface Props {
   data: {
@@ -9,9 +10,10 @@ interface Props {
     value: boolean;
     toggle: () => void;
   };
+  setOldestFirst: (val: boolean) => void;
 }
 
-function Header({ data, favFilter }: Props) {
+function Header({ data, favFilter, setOldestFirst }: Props) {
   return (
     <header>
       <h1>Video App</h1>
@@ -28,6 +30,7 @@ function Header({ data, favFilter }: Props) {
           />
           Favorites only
         </Label>
+        <SortDropdown setOldestFirst={setOldestFirst} />
       </Nav>
     </header>
   );

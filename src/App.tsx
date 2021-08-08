@@ -16,9 +16,15 @@ function App() {
   } = useVideos();
 
   const [favoritesOnly, setFavoritesOnly] = useState(false);
+  const [oldestFirst, setOldestFirst] = useState(false);
+
   const listToDisplay = favoritesOnly
     ? videos.filter(({ favorite }) => favorite)
-    : videos;
+    : [...videos];
+
+  if (oldestFirst) {
+    listToDisplay.sort((a, b) => a.timestamp - b.timestamp);
+  }
 
   const toggleFavFilter = () => setFavoritesOnly((prev) => !prev);
 
@@ -27,6 +33,7 @@ function App() {
       <Header
         favFilter={{ value: favoritesOnly, toggle: toggleFavFilter }}
         data={{ load: loadDemoData, wipe: wipeData }}
+        setOldestFirst={setOldestFirst}
       />
       <NewVideoForm addVideo={addVideo} />
       {listToDisplay.map((video) => (
