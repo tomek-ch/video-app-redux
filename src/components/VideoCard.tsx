@@ -2,13 +2,15 @@ import { Button, Card, Input, Label } from "reactstrap";
 import { useVideosContext } from "../context/VideosContext";
 import Video from "../types/video";
 import formatDate from "../utils/formatDate";
+import VideoModal from "./VideoModal";
 
 interface Props {
   video: Video;
 }
 
 function VideoCard({
-  video: { id, title, views, likes, thumbnail, timestamp, favorite },
+  video,
+  video: { id, title, views, likes, timestamp, favorite },
 }: Props) {
   const { removeVideo, toggleFavorite } = useVideosContext();
 
@@ -17,7 +19,7 @@ function VideoCard({
       <h2>{title}</h2>
       <p>Views: {views || "Not available"}</p>
       <p>Likes: {likes}</p>
-      <img src={thumbnail} alt={`Thumbnail for ${title}`} />
+      <VideoModal video={video} />
       <p>Added: {formatDate(timestamp)}</p>
       <Button onClick={() => removeVideo(id)} color="danger">
         Delete
