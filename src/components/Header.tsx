@@ -1,36 +1,28 @@
 import { Button, Input, Label, Nav } from "reactstrap";
+import { useVideosContext } from "../context/VideosContext";
 import SortDropdown from "./SortDropdown";
 
-interface Props {
-  data: {
-    load: () => void;
-    wipe: () => void;
-  };
-  favFilter: {
-    value: boolean;
-    toggle: () => void;
-  };
-  setOldestFirst: (val: boolean) => void;
-}
+function Header() {
+  const { loadDemoData, wipeData, favoritesOnly, toggleFavFilter } =
+    useVideosContext();
 
-function Header({ data, favFilter, setOldestFirst }: Props) {
   return (
     <header>
       <h1>Video App</h1>
       <Nav>
-        <Button onClick={data.load}>Load demo videos</Button>
-        <Button color="danger" onClick={data.wipe}>
+        <Button onClick={loadDemoData}>Load demo videos</Button>
+        <Button color="danger" onClick={wipeData}>
           Delete all videos
         </Button>
         <Label check>
           <Input
             type="checkbox"
-            checked={favFilter.value}
-            onChange={favFilter.toggle}
+            checked={favoritesOnly}
+            onChange={toggleFavFilter}
           />
           Favorites only
         </Label>
-        <SortDropdown setOldestFirst={setOldestFirst} />
+        <SortDropdown />
       </Nav>
     </header>
   );

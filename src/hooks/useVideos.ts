@@ -58,13 +58,29 @@ function useVideos() {
 
   const wipeData = () => setVideos([]);
 
+  const [favoritesOnly, setFavoritesOnly] = useState(false);
+  const [oldestFirst, setOldestFirst] = useState(false);
+
+  const listToDisplay = favoritesOnly
+    ? videos.filter(({ favorite }) => favorite)
+    : [...videos];
+
+  if (oldestFirst) {
+    listToDisplay.sort((a, b) => a.timestamp - b.timestamp);
+  }
+
+  const toggleFavFilter = () => setFavoritesOnly((prev) => !prev);
+
   return {
-    videos,
+    videos: listToDisplay,
     addVideo,
     removeVideo,
     toggleFavorite,
     loadDemoData,
     wipeData,
+    favoritesOnly,
+    toggleFavFilter,
+    setOldestFirst,
   };
 }
 

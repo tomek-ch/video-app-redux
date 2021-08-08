@@ -1,18 +1,17 @@
 import { Button, Card, Input, Label } from "reactstrap";
+import { useVideosContext } from "../context/VideosContext";
 import Video from "../types/video";
 import formatDate from "../utils/formatDate";
 
 interface Props {
   video: Video;
-  removeVideo: (id: string) => void;
-  toggleFavorite: (id: string) => void;
 }
 
 function VideoCard({
   video: { id, title, views, likes, thumbnail, timestamp, favorite },
-  removeVideo,
-  toggleFavorite,
 }: Props) {
+  const { removeVideo, toggleFavorite } = useVideosContext();
+
   return (
     <Card>
       <h2>{title}</h2>

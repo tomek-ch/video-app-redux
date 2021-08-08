@@ -1,43 +1,18 @@
-import { useState } from "react";
 import { Container } from "reactstrap";
 import Header from "./components/Header";
 import NewVideoForm from "./components/NewVideoForm";
 import VideoCard from "./components/VideoCard";
-import useVideos from "./hooks/useVideos";
+import { useVideosContext } from "./context/VideosContext";
 
 function App() {
-  const {
-    videos,
-    addVideo,
-    removeVideo,
-    toggleFavorite,
-    loadDemoData,
-    wipeData,
-  } = useVideos();
-
-  const [favoritesOnly, setFavoritesOnly] = useState(false);
-  const [oldestFirst, setOldestFirst] = useState(false);
-
-  const listToDisplay = favoritesOnly
-    ? videos.filter(({ favorite }) => favorite)
-    : [...videos];
-
-  if (oldestFirst) {
-    listToDisplay.sort((a, b) => a.timestamp - b.timestamp);
-  }
-
-  const toggleFavFilter = () => setFavoritesOnly((prev) => !prev);
+  const { videos } = useVideosContext();
 
   return (
     <Container>
-      <Header
-        favFilter={{ value: favoritesOnly, toggle: toggleFavFilter }}
-        data={{ load: loadDemoData, wipe: wipeData }}
-        setOldestFirst={setOldestFirst}
-      />
-      <NewVideoForm addVideo={addVideo} />
-      {listToDisplay.map((video) => (
-        <VideoCard key={video.id} {...{ video, removeVideo, toggleFavorite }} />
+      <Header />
+      <NewVideoForm />
+      {videos.map((vid) => (
+        <VideoCard key={vid.id} video={vid} />
       ))}
     </Container>
   );

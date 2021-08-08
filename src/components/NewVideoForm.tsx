@@ -1,15 +1,12 @@
 import { useState } from "react";
 import { Alert, Button, Col, Form, Input, Label, Row } from "reactstrap";
-import Video from "../types/video";
+import { useVideosContext } from "../context/VideosContext";
 import getVideo from "../utils/getVideo";
 
-interface Props {
-  addVideo: (newVideo: Video) => boolean;
-}
-
-function NewVideoForm({ addVideo }: Props) {
+function NewVideoForm() {
   const [text, setText] = useState("");
   const [error, setError] = useState("");
+  const { addVideo } = useVideosContext();
 
   return (
     <Form

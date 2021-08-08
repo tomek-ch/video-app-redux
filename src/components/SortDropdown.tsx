@@ -5,14 +5,11 @@ import {
   DropdownToggle,
   DropdownItem,
 } from "reactstrap";
+import { useVideosContext } from "../context/VideosContext";
 
-interface Props {
-  setOldestFirst: (val: boolean) => void;
-}
-
-function SortDropdown({ setOldestFirst }: Props) {
+function SortDropdown() {
+  const { setOldestFirst } = useVideosContext();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
   return (
