@@ -15,8 +15,12 @@ function useVideos() {
 
   // Save data locally
   useEffect(() => {
-    const ids = videos.map(({ id }) => id);
-    const data = JSON.stringify(ids);
+    const vids = videos.map(({ id, favorite, timestamp }) => ({
+      id,
+      favorite,
+      timestamp,
+    }));
+    const data = JSON.stringify(vids);
     localStorage.setItem("videos", data);
   }, [videos]);
 
