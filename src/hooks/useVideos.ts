@@ -92,11 +92,14 @@ function useVideos() {
     addVideo,
     removeVideo,
     toggleFavorite,
+
     loadDemoData,
     wipeData,
+
     favoritesOnly,
     toggleFavFilter,
     setOldestFirst,
+
     pagesCount,
     setCurrentPage,
     currentPage,
