@@ -10,13 +10,25 @@ function PagesList() {
     }
   };
 
+  const goToPrevPage = () => {
+    if (currentPage !== 0) {
+      setPage(currentPage - 1);
+    }
+  };
+
+  const goToNextPage = () => {
+    if (currentPage + 1 !== pagesCount) {
+      setPage(currentPage + 1);
+    }
+  };
+
   return (
     <Pagination aria-label="Videos list">
       <PaginationItem>
         <PaginationLink first onClick={() => setPage(0)} />
       </PaginationItem>
       <PaginationItem>
-        <PaginationLink previous onClick={() => setPage(currentPage - 1)} />
+        <PaginationLink previous onClick={goToPrevPage} />
       </PaginationItem>
       {[...Array(pagesCount).keys()].map((page) => (
         <PaginationItem key={`page-${page}`} active={currentPage === page}>
@@ -26,7 +38,7 @@ function PagesList() {
         </PaginationItem>
       ))}
       <PaginationItem>
-        <PaginationLink next onClick={() => setPage(currentPage + 1)} />
+        <PaginationLink next onClick={goToNextPage} />
       </PaginationItem>
       <PaginationItem>
         <PaginationLink last onClick={() => setPage(pagesCount - 1)} />
