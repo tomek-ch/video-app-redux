@@ -20,10 +20,6 @@ function VideoCard({
       <p>Views: {views ?? "Not available"}</p>
       <p>Likes: {likes}</p>
       <p>Added: {formatDate(timestamp)}</p>
-      <VideoModal video={video} />
-      <Button onClick={() => removeVideo(id)} color="danger">
-        Delete
-      </Button>
       <Label>
         <Input
           type="checkbox"
@@ -32,6 +28,10 @@ function VideoCard({
         />
         Favorite
       </Label>
+      <VideoModal video={video} />
+      <Button onClick={() => removeVideo(id)} color="danger">
+        Delete
+      </Button>
     </Card>
   );
 }
