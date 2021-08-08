@@ -78,8 +78,17 @@ function useVideos() {
 
   const toggleFavFilter = () => setFavoritesOnly((prev) => !prev);
 
+  // *** Pagination ***
+
+  const pagesCount = Math.ceil(videos.length / 5);
+  const [currentPage, setCurrentPage] = useState(0);
+  const currentPageVideos = listToDisplay.slice(
+    currentPage * 5,
+    currentPage * 5 + 5
+  );
+
   return {
-    videos: listToDisplay,
+    videos: currentPageVideos,
     addVideo,
     removeVideo,
     toggleFavorite,
@@ -88,6 +97,8 @@ function useVideos() {
     favoritesOnly,
     toggleFavFilter,
     setOldestFirst,
+    pagesCount,
+    setCurrentPage,
   };
 }
 
