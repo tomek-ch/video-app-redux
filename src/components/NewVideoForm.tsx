@@ -24,6 +24,7 @@ function NewVideoForm() {
         if (addedSuccessfully) {
           setIsSuccessful(true);
           setError("");
+          setText("");
           return;
         }
 
