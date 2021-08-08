@@ -99,6 +99,7 @@ function useVideos() {
     setOldestFirst,
     pagesCount,
     setCurrentPage,
+    currentPage,
   };
 }
 
