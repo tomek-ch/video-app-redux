@@ -6,6 +6,7 @@ import getVideo from "../utils/getVideo";
 function NewVideoForm() {
   const [text, setText] = useState("");
   const [error, setError] = useState("");
+  const [isSuccessful, setIsSuccessful] = useState(false);
   const { addVideo } = useVideosContext();
 
   return (
@@ -15,11 +16,18 @@ function NewVideoForm() {
         const video = await getVideo(text);
 
         if (!video) {
-          return setError("Could not find that video");
+          setError("Could not find that video");
+          return;
         }
 
         const addedSuccessfully = addVideo(video);
-        setError(addedSuccessfully ? "" : "Video already in library");
+        if (addedSuccessfully) {
+          setIsSuccessful(true);
+          setError("");
+          return;
+        }
+
+        setError("Video already in library");
       }}
     >
       <Label for="video">Video url or id</Label>
@@ -39,6 +47,7 @@ function NewVideoForm() {
         </Col>
       </Row>
       {error && <Alert color="danger">{error}</Alert>}
+      {isSuccessful && <Alert color="success">Video added successfully</Alert>}
     </Form>
   );
 }
