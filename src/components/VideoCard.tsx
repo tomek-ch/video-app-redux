@@ -20,7 +20,7 @@ function VideoCard({
   return (
     <Card className="p-5 mb-5">
       <Row>
-        <Col>
+        <Col xs={12} md={6} className="mb-4">
           <h2>{title}</h2>
           <p>Views: {views ?? "Not available"}</p>
           <p>Likes: {likes}</p>
@@ -46,10 +46,6 @@ function VideoCard({
               Watch
             </Button>
           </div>
-          <Row>
-            <Col xs="6"></Col>
-            <Col xs="6"></Col>
-          </Row>
         </Col>
         <Col>
           <VideoModal {...{ video, toggleModal, isModalOpen }} />
