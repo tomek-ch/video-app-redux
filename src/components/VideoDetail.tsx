@@ -11,7 +11,7 @@ interface Props {
 }
 
 function VideoDetails({
-  video: { id, views, likes, timestamp, favorite },
+  video: { id, title, views, likes, timestamp, favorite },
   isModalOpen,
   toggleModal,
 }: Props) {
