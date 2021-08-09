@@ -33,28 +33,24 @@ function Header() {
             <DropdownItem onClick={wipeData}>Delete all videos</DropdownItem>
             <DropdownItem onClick={loadDemoData}>Load demo videos</DropdownItem>
             <DropdownItem divider />
-            <DropdownItem>
-              <Label check>
-                <Input
-                  type="checkbox"
-                  checked={favoritesOnly}
-                  onChange={toggleFavFilter}
-                  className="me-1"
-                />
-                Favorites only
-              </Label>
-            </DropdownItem>
-            <DropdownItem>
-              <Label check>
-                <Input
-                  type="checkbox"
-                  checked={oldestFirst}
-                  onChange={toggleOldestFirst}
-                  className="me-1"
-                />
-                Oldest first
-              </Label>
-            </DropdownItem>
+            <Label check className="px-3 py-1">
+              <Input
+                type="checkbox"
+                checked={favoritesOnly}
+                onChange={toggleFavFilter}
+                className="me-1"
+              />
+              Favorites only
+            </Label>
+            <Label check className="px-3 py-1">
+              <Input
+                type="checkbox"
+                checked={oldestFirst}
+                onChange={toggleOldestFirst}
+                className="me-1"
+              />
+              Oldest first
+            </Label>
           </DropdownMenu>
         </Dropdown>
       </nav>
