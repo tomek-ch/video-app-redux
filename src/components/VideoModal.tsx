@@ -1,6 +1,13 @@
-import { Modal, ModalHeader, ModalBody, CardImg } from "reactstrap";
+import {
+  Modal,
+  ModalHeader,
+  ModalBody,
+  CardImg,
+  ModalFooter,
+} from "reactstrap";
 import Video from "../types/video";
 import getEmbedLink from "../utils/getEmbedLink";
+import VideoDetails from "./VideoDetail";
 
 interface Props {
   video: Video;
@@ -9,6 +16,7 @@ interface Props {
 }
 
 function VideoModal({
+  video,
   video: { thumbnail, id, title },
   isModalOpen,
   toggleModal,
@@ -23,6 +31,11 @@ function VideoModal({
             <iframe title={title} src={getEmbedLink(id)} />
           </div>
         </ModalBody>
+        <ModalFooter>
+          <div className="me-auto">
+            <VideoDetails {...{ video, toggleModal, isModalOpen }} />
+          </div>
+        </ModalFooter>
       </Modal>
     </div>
   );

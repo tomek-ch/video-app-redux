@@ -16,7 +16,7 @@ function VideoCard({ video }: Props) {
     <Card className="p-5 mb-5">
       <Row>
         <Col xs={12} md={6} className="mb-4">
-          <VideoDetails {...{ video, toggleModal }} />
+          <VideoDetails {...{ video, toggleModal, isModalOpen }} />
         </Col>
         <Col>
           <VideoModal {...{ video, toggleModal, isModalOpen }} />
