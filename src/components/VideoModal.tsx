@@ -1,10 +1,4 @@
-import {
-  Modal,
-  ModalHeader,
-  ModalBody,
-  CardImg,
-  ModalFooter,
-} from "reactstrap";
+import { Modal, ModalBody, CardImg, ModalFooter } from "reactstrap";
 import Video from "../types/video";
 import getEmbedLink from "../utils/getEmbedLink";
 import VideoDetails from "./VideoDetail";
