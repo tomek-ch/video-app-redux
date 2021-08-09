@@ -32,7 +32,7 @@ function NewVideoForm() {
       }}
     >
       <Label for="video">Video url or id</Label>
-      <div className="d-flex mb-2">
+      <div className="d-flex my-2">
         <Input
           placeholder="https://youtube.com/..."
           value={text}
