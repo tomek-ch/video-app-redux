@@ -76,7 +76,10 @@ function useVideos() {
     listToDisplay.sort((a, b) => a.timestamp - b.timestamp);
   }
 
-  const toggleFavFilter = () => setFavoritesOnly((prev) => !prev);
+  const toggle = (cb: (value: React.SetStateAction<boolean>) => void) => () =>
+    cb((prev) => !prev);
+  const toggleFavFilter = toggle(setFavoritesOnly);
+  const toggleOldestFirst = toggle(setOldestFirst);
 
   // *** Pagination ***
 
@@ -98,7 +101,8 @@ function useVideos() {
 
     favoritesOnly,
     toggleFavFilter,
-    setOldestFirst,
+    oldestFirst,
+    toggleOldestFirst,
 
     pagesCount,
     setCurrentPage,
