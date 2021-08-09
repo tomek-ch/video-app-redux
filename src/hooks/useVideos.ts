@@ -76,11 +76,6 @@ function useVideos() {
     listToDisplay.sort((a, b) => a.timestamp - b.timestamp);
   }
 
-  const toggle = (cb: (value: React.SetStateAction<boolean>) => void) => () =>
-    cb((prev) => !prev);
-  const toggleFavFilter = toggle(setFavoritesOnly);
-  const toggleOldestFirst = toggle(setOldestFirst);
-
   // *** Pagination ***
 
   const pagesCount = Math.ceil(listToDisplay.length / 5);
@@ -89,6 +84,13 @@ function useVideos() {
     currentPage * 5,
     currentPage * 5 + 5
   );
+
+  // Togglers
+  const toggleFavFilter = () => {
+    setFavoritesOnly((prev) => !prev);
+    setCurrentPage(0);
+  };
+  const toggleOldestFirst = () => setOldestFirst((prev) => !prev);
 
   return {
     videos: currentPageVideos,
