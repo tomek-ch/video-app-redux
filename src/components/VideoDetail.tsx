@@ -5,13 +5,13 @@ import formatDate from "../utils/formatDate";
 
 interface Props {
   video: Video;
-  isModalOpen: boolean;
+  isModal?: boolean;
   toggleModal: () => void;
 }
 
 function VideoDetails({
   video: { id, title, views, likes, timestamp, favorite },
-  isModalOpen,
+  isModal,
   toggleModal,
 }: Props) {
   const { toggleFavorite, removeVideo } = useVideosContext();
@@ -36,7 +36,7 @@ function VideoDetails({
           Delete
         </Button>
         <Button onClick={toggleModal} color="primary">
-          {isModalOpen ? "Close" : "Watch"}
+          {isModal ? "Close" : "Watch"}
         </Button>
       </div>
     </>

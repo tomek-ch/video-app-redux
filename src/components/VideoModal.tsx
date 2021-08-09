@@ -26,7 +26,7 @@ function VideoModal({
         </ModalBody>
         <ModalFooter>
           <div className="me-auto">
-            <VideoDetails {...{ video, toggleModal, isModalOpen }} />
+            <VideoDetails {...{ video, toggleModal, isModal: true }} />
           </div>
         </ModalFooter>
       </Modal>
