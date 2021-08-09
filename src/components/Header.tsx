@@ -17,6 +17,8 @@ function Header() {
     toggleFavFilter,
     toggleOldestFirst,
     oldestFirst,
+    isGrid,
+    toggleGrid,
   } = useVideosContext();
   const [dropdownOpen, setDropDownOpen] = useState(false);
   const toggle = () => setDropDownOpen((prev) => !prev);
@@ -50,6 +52,15 @@ function Header() {
                 className="me-1"
               />
               Oldest first
+            </Label>
+            <Label check className="px-3 py-1">
+              <Input
+                type="checkbox"
+                checked={isGrid}
+                onChange={toggleGrid}
+                className="me-1"
+              />
+              Grid view
             </Label>
           </DropdownMenu>
         </Dropdown>

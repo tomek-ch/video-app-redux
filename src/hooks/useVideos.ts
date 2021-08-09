@@ -78,11 +78,12 @@ function useVideos() {
 
   // *** Pagination ***
 
-  const pagesCount = Math.ceil(listToDisplay.length / 5);
+  const VIDS_PER_PAGE = 6;
+  const pagesCount = Math.ceil(listToDisplay.length / VIDS_PER_PAGE);
   const [currentPage, setCurrentPage] = useState(0);
   const currentPageVideos = listToDisplay.slice(
-    currentPage * 5,
-    currentPage * 5 + 5
+    currentPage * VIDS_PER_PAGE,
+    currentPage * VIDS_PER_PAGE + VIDS_PER_PAGE
   );
 
   // Togglers
@@ -91,6 +92,11 @@ function useVideos() {
     setCurrentPage(0);
   };
   const toggleOldestFirst = () => setOldestFirst((prev) => !prev);
+
+  // *** Layout ***
+
+  const [isGrid, setIsGrid] = useState(false);
+  const toggleGrid = () => setIsGrid((prev) => !prev);
 
   return {
     videos: currentPageVideos,
@@ -109,6 +115,9 @@ function useVideos() {
     pagesCount,
     setCurrentPage,
     currentPage,
+
+    isGrid,
+    toggleGrid,
   };
 }
 
