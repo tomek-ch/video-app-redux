@@ -25,7 +25,6 @@ function VideoModal({
     <div>
       <CardImg onClick={toggleModal} src={thumbnail} alt="Video thumbnail" />
       <Modal isOpen={isModalOpen} toggle={toggleModal} size="xl">
-        <ModalHeader toggle={toggleModal}>{title}</ModalHeader>
         <ModalBody>
           <div className="ratio ratio-16x9">
             <iframe title={title} src={getEmbedLink(id)} />
