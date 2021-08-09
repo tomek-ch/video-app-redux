@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Alert, Button, Col, Form, Input, Label, Row } from "reactstrap";
+import { Alert, Button, Form, Input, Label } from "reactstrap";
 import { useVideosContext } from "../context/VideosContext";
 import getVideo from "../utils/getVideo";
 
@@ -32,21 +32,18 @@ function NewVideoForm() {
       }}
     >
       <Label for="video">Video url or id</Label>
-      <Row>
-        <Col>
-          <Input
-            placeholder="https://youtube.com/..."
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            id="video"
-          />
-        </Col>
-        <Col>
-          <Button color="primary" disabled={!text}>
-            Add
-          </Button>
-        </Col>
-      </Row>
+      <div className="d-flex mb-2">
+        <Input
+          placeholder="https://youtube.com/..."
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          id="video"
+          className="me-2"
+        />
+        <Button color="primary" disabled={!text}>
+          Add
+        </Button>
+      </div>
       {error && <Alert color="danger">{error}</Alert>}
       {isSuccessful && <Alert color="success">Video added successfully</Alert>}
     </Form>

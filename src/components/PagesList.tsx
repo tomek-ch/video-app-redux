@@ -23,27 +23,29 @@ function PagesList() {
   };
 
   return (
-    <Pagination aria-label="Videos list">
-      <PaginationItem>
-        <PaginationLink first onClick={() => setPage(0)} />
-      </PaginationItem>
-      <PaginationItem>
-        <PaginationLink previous onClick={goToPrevPage} />
-      </PaginationItem>
-      {[...Array(pagesCount).keys()].map((page) => (
-        <PaginationItem key={`page-${page}`} active={currentPage === page}>
-          <PaginationLink onClick={() => setPage(page)}>
-            {page + 1}
-          </PaginationLink>
+    <div className="d-flex justify-content-center">
+      <Pagination aria-label="Videos list">
+        <PaginationItem>
+          <PaginationLink first onClick={() => setPage(0)} />
         </PaginationItem>
-      ))}
-      <PaginationItem>
-        <PaginationLink next onClick={goToNextPage} />
-      </PaginationItem>
-      <PaginationItem>
-        <PaginationLink last onClick={() => setPage(pagesCount - 1)} />
-      </PaginationItem>
-    </Pagination>
+        <PaginationItem>
+          <PaginationLink previous onClick={goToPrevPage} />
+        </PaginationItem>
+        {[...Array(pagesCount).keys()].map((page) => (
+          <PaginationItem key={`page-${page}`} active={currentPage === page}>
+            <PaginationLink onClick={() => setPage(page)}>
+              {page + 1}
+            </PaginationLink>
+          </PaginationItem>
+        ))}
+        <PaginationItem>
+          <PaginationLink next onClick={goToNextPage} />
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink last onClick={() => setPage(pagesCount - 1)} />
+        </PaginationItem>
+      </Pagination>
+    </div>
   );
 }
 

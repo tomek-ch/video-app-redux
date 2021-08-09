@@ -1,4 +1,4 @@
-import { Modal, ModalHeader, ModalBody } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, CardImg } from "reactstrap";
 import Video from "../types/video";
 import getEmbedLink from "../utils/getEmbedLink";
 
@@ -15,11 +15,13 @@ function VideoModal({
 }: Props) {
   return (
     <div>
-      <img onClick={toggleModal} src={thumbnail} alt="Video thumbnail" />
-      <Modal isOpen={isModalOpen} toggle={toggleModal}>
+      <CardImg onClick={toggleModal} src={thumbnail} alt="Video thumbnail" />
+      <Modal isOpen={isModalOpen} toggle={toggleModal} size="xl">
         <ModalHeader toggle={toggleModal}>{title}</ModalHeader>
         <ModalBody>
-          <iframe title={title} src={getEmbedLink(id)} />
+          <div className="ratio ratio-16x9">
+            <iframe title={title} src={getEmbedLink(id)} />
+          </div>
         </ModalBody>
       </Modal>
     </div>

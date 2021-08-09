@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Card, Input, Label } from "reactstrap";
+import { Button, Card, Col, Input, Label, Row } from "reactstrap";
 import { useVideosContext } from "../context/VideosContext";
 import Video from "../types/video";
 import formatDate from "../utils/formatDate";
@@ -18,26 +18,44 @@ function VideoCard({
   const toggleModal = () => setIsModalOpen((prev) => !prev);
 
   return (
-    <Card>
-      <h2>{title}</h2>
-      <p>Views: {views ?? "Not available"}</p>
-      <p>Likes: {likes}</p>
-      <p>Added: {formatDate(timestamp)}</p>
-      <Label>
-        <Input
-          type="checkbox"
-          checked={favorite}
-          onChange={() => toggleFavorite(id)}
-        />
-        Favorite
-      </Label>
-      <VideoModal {...{ video, toggleModal, isModalOpen }} />
-      <Button onClick={() => removeVideo(id)} color="danger">
-        Delete
-      </Button>
-      <Button onClick={toggleModal} color="primary">
-        Watch
-      </Button>
+    <Card className="p-5 mb-5">
+      <Row>
+        <Col>
+          <h2>{title}</h2>
+          <p>Views: {views ?? "Not available"}</p>
+          <p>Likes: {likes}</p>
+          <p>Added: {formatDate(timestamp)}</p>
+          <Label>
+            <Input
+              type="checkbox"
+              checked={favorite}
+              onChange={() => toggleFavorite(id)}
+              className="mb-4 me-1"
+            />
+            Favorite
+          </Label>
+          <div>
+            <Button
+              onClick={() => removeVideo(id)}
+              color="danger"
+              className="me-2"
+            >
+              Delete
+            </Button>
+            <Button onClick={toggleModal} color="primary">
+              Watch
+            </Button>
+          </div>
+          <Row>
+            <Col xs="6"></Col>
+            <Col xs="6"></Col>
+          </Row>
+        </Col>
+        <Col>
+          <VideoModal {...{ video, toggleModal, isModalOpen }} />
+        </Col>
+      </Row>
+      <div></div>
     </Card>
   );
 }
