@@ -32,11 +32,11 @@ function VideoDetails({
         Favorite
       </Label>
       <div>
-        <Button onClick={() => removeVideo(id)} color="danger" className="me-2">
-          Delete
-        </Button>
-        <Button onClick={toggleModal} color="primary">
+        <Button onClick={toggleModal} color="primary" className="me-2">
           {isModal ? "Close" : "Watch"}
+        </Button>
+        <Button onClick={() => removeVideo(id)} color="danger">
+          Delete
         </Button>
       </div>
     </>
