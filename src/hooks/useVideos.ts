@@ -45,7 +45,7 @@ function useVideos() {
     handleRemove,
   });
 
-  // *** Wipe and load data ***
+  // Wipe and load data
 
   const loadDemoData = async () => {
     const videos = await getVideos(demoVideos);
@@ -54,7 +54,7 @@ function useVideos() {
 
   const wipeData = () => setVideos([]);
 
-  // *** Layout ***
+  // Layout
 
   const [isGrid, toggleGrid] = useToggle();
 
