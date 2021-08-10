@@ -3,6 +3,11 @@ import { useVideosContext } from "../context/VideosContext";
 
 function PagesList() {
   const { pagesCount, setCurrentPage, currentPage } = useVideosContext();
+
+  if (pagesCount < 2) {
+    return null;
+  }
+
   const setPage = (page: number) => {
     if (currentPage !== page) {
       setCurrentPage(page);
