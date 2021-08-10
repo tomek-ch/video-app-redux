@@ -11,6 +11,7 @@ function NewVideoForm() {
 
   return (
     <Form
+      className="top"
       onSubmit={async (e) => {
         e.preventDefault();
         const video = await getVideo(text);

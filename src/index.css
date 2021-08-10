@@ -1,3 +1,9 @@
 html {
   scroll-behavior: auto !important;
 }
+
+.top {
+  max-width: 600px;
+  flex-grow: 1;
+  margin: auto;
+}

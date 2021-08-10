@@ -23,7 +23,7 @@ function Header() {
   const [dropdownOpen, toggleDropdown] = useToggle();
 
   return (
-    <header className="d-flex align-items-center justify-content-between my-3">
+    <header className="d-flex align-items-center justify-content-between my-3 top">
       <h1>Video App</h1>
       <nav>
         <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
