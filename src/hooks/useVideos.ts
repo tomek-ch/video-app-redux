@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Video from "../types/video";
 import demoVideos from "../utils/demoVideos";
 import getVideos from "../utils/vidsFromArray";
-import useLocalSync from "./useLocalSync";
-import useToggle from "./useToggle";
+import useCrud from "./useCrud";
 import useFilter from "./useFilter";
-import useSort from "./useSort";
+import useLocalSync from "./useLocalSync";
 import usePagination from "./usePagination";
+import useSort from "./useSort";
+import useToggle from "./useToggle";
 
 function useVideos() {
   const [videos, setVideos] = useState<Video[]>([]);
@@ -29,21 +30,8 @@ function useVideos() {
     setCurrentPage(0);
   };
 
-  // *** CRUD ***
-
-  const addVideo = (newVid: Video) => {
-    const videoExists = videos.find(({ id }) => id === newVid.id);
-    if (videoExists) {
-      return false;
-    }
-
-    setVideos((prev) => [newVid, ...prev]);
-    return true;
-  };
-
-  const removeVideo = (deleteId: string) => {
-    setVideos((prev) => prev.filter(({ id }) => id !== deleteId));
-
+  // CRUD
+  const handleRemove = () => {
     // Go back a page if it's the last video
     // from the current page being deleted
     if (currentPageVideos.length === 1 && pagesCount > 1) {
@@ -51,18 +39,11 @@ function useVideos() {
     }
   };
 
-  const toggleFavorite = (favId: string) => {
-    setVideos((prev) =>
-      prev.map((vid) =>
-        vid.id === favId
-          ? {
-              ...vid,
-              favorite: !vid.favorite,
-            }
-          : vid
-      )
-    );
-  };
+  const { addVideo, removeVideo, toggleFavorite } = useCrud({
+    videos,
+    setVideos,
+    handleRemove,
+  });
 
   // *** Wipe and load data ***
 
