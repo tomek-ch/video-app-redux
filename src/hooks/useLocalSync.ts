@@ -12,7 +12,7 @@ function useLocalSync({ videos, setVideos }: Args) {
     const localData = localStorage.getItem("videos");
     const parsedData = localData ? JSON.parse(localData) : [];
     getVideos(parsedData).then(setVideos);
-  }, []);
+  }, [setVideos]);
 
   useEffect(() => {
     const vids = videos.map(({ id, favorite, timestamp }) => ({
