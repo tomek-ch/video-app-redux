@@ -41,5 +41,21 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "license": "ISC",
+  "description": "Save and manage videos from YouTube and Vimeo",
+  "keywords": ["React"],
+  "author": {
+    "email": "chmielnicki18@gmail.com",
+    "name": "Tomasz Chmielnicki", 
+    "url": "https://tomek-ch.github.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomek-ch/video-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tomek-ch/video-app/issues"
+  },
+  "homepage": "https://github.com/tomek-ch/video-app#readme"
 }
