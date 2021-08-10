@@ -8,7 +8,6 @@ async function fetchFromVimeo(id: string) {
       return await response.json();
     }
   } catch (e) {
-    console.log(e);
     return null;
   }
 }

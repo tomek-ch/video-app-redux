@@ -17,7 +17,6 @@ async function fetchFromYt(id: string) {
       return data.items[0];
     }
   } catch (e) {
-    console.log(e);
     return null;
   }
 }
