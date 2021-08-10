@@ -25,6 +25,36 @@ function useVideos() {
     localStorage.setItem("videos", data);
   }, [videos]);
 
+  // *** Filter and sort ***
+
+  const [favoritesOnly, toggleFavoritesOnly] = useToggle();
+  const [oldestFirst, toggleOldestFirst] = useToggle();
+
+  const listToDisplay = favoritesOnly
+    ? videos.filter(({ favorite }) => favorite)
+    : // Spread to prevent mutation of state by sort()
+      [...videos];
+
+  if (oldestFirst) {
+    listToDisplay.sort((a, b) => a.timestamp - b.timestamp);
+  }
+
+  // *** Pagination ***
+
+  const VIDS_PER_PAGE = 6;
+  const pagesCount = Math.ceil(listToDisplay.length / VIDS_PER_PAGE);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const currentPageVideos = listToDisplay.slice(
+    currentPage * VIDS_PER_PAGE,
+    currentPage * VIDS_PER_PAGE + VIDS_PER_PAGE
+  );
+
+  const toggleFavFilter = () => {
+    toggleFavoritesOnly();
+    setCurrentPage(0);
+  };
+
   // *** CRUD ***
 
   const addVideo = (newVid: Video) => {
@@ -39,6 +69,12 @@ function useVideos() {
 
   const removeVideo = (deleteId: string) => {
     setVideos((prev) => prev.filter(({ id }) => id !== deleteId));
+
+    // Go back a page if it's the last video
+    // from the current page being deleted
+    if (currentPageVideos.length === 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
   };
 
   const toggleFavorite = (favId: string) => {
@@ -62,35 +98,6 @@ function useVideos() {
   };
 
   const wipeData = () => setVideos([]);
-
-  // *** Filter and sort ***
-
-  const [favoritesOnly, toggleFavoritesOnly] = useToggle();
-  const [oldestFirst, toggleOldestFirst] = useToggle();
-
-  const listToDisplay = favoritesOnly
-    ? videos.filter(({ favorite }) => favorite)
-    : // Spread to prevent mutation of state by sort()
-      [...videos];
-
-  if (oldestFirst) {
-    listToDisplay.sort((a, b) => a.timestamp - b.timestamp);
-  }
-
-  // *** Pagination ***
-
-  const VIDS_PER_PAGE = 6;
-  const pagesCount = Math.ceil(listToDisplay.length / VIDS_PER_PAGE);
-  const [currentPage, setCurrentPage] = useState(0);
-  const currentPageVideos = listToDisplay.slice(
-    currentPage * VIDS_PER_PAGE,
-    currentPage * VIDS_PER_PAGE + VIDS_PER_PAGE
-  );
-
-  const toggleFavFilter = () => {
-    toggleFavoritesOnly();
-    setCurrentPage(0);
-  };
 
   // *** Layout ***
 
