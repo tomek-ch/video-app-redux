@@ -21,7 +21,7 @@ function VideoModal({
       <Modal isOpen={isModalOpen} toggle={toggleModal} size="xl">
         <ModalBody>
           <div className="ratio ratio-16x9">
-            <iframe title={title} src={getEmbedLink(id)} />
+            <iframe title={title} src={getEmbedLink(id)} allow="autoplay" />
           </div>
         </ModalBody>
         <ModalFooter>
