@@ -2,18 +2,13 @@ import { useEffect, useState } from "react";
 import Video from "../types/video";
 import demoVideos from "../utils/demoVideos";
 import getVideos from "../utils/vidsFromArray";
+import useLocalSync from "./useLocalSync";
 import useToggle from "./useToggle";
 
 function useVideos() {
   const [videos, setVideos] = useState<Video[]>([]);
 
-  // *** Local sync ***
-
-  useEffect(() => {
-    const localData = localStorage.getItem("videos");
-    const parsedData = localData ? JSON.parse(localData) : [];
-    getVideos(parsedData).then(setVideos);
-  }, []);
+  useLocalSync({ videos, setVideos });
 
   useEffect(() => {
     const vids = videos.map(({ id, favorite, timestamp }) => ({
