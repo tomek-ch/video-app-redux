@@ -15,14 +15,14 @@ function useVideos() {
   useLocalSync({ videos, setVideos });
 
   // Sort
-  const { listToDisplay, favoritesOnly, toggleFavoritesOnly } = useSort(videos);
+  const { sorted, favoritesOnly, toggleFavoritesOnly } = useSort(videos);
 
   // Filter
-  const { oldestFirst, toggleOldestFirst } = useFilter(listToDisplay);
+  const { filtered, oldestFirst, toggleOldestFirst } = useFilter(sorted);
 
   // Pagination
   const { pagesCount, currentPage, currentPageVideos, setCurrentPage } =
-    usePagination(videos);
+    usePagination(filtered);
 
   const toggleFavFilter = () => {
     toggleFavoritesOnly();

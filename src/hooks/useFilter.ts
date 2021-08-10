@@ -3,12 +3,11 @@ import useToggle from "./useToggle";
 
 function useFilter(list: Video[]) {
   const [oldestFirst, toggleOldestFirst] = useToggle();
+  const filtered = oldestFirst
+    ? list.sort((a, b) => a.timestamp - b.timestamp)
+    : list;
 
-  if (oldestFirst) {
-    list.sort((a, b) => a.timestamp - b.timestamp);
-  }
-
-  return { oldestFirst, toggleOldestFirst };
+  return { filtered, oldestFirst, toggleOldestFirst };
 }
 
 export default useFilter;

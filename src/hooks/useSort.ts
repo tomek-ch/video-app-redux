@@ -4,12 +4,12 @@ import useToggle from "./useToggle";
 function useSort(videos: Video[]) {
   const [favoritesOnly, toggleFavoritesOnly] = useToggle();
 
-  const listToDisplay = favoritesOnly
+  const sorted = favoritesOnly
     ? videos.filter(({ favorite }) => favorite)
     : // Spread to prevent mutation of state by sort()
       [...videos];
 
-  return { listToDisplay, favoritesOnly, toggleFavoritesOnly };
+  return { sorted, favoritesOnly, toggleFavoritesOnly };
 }
 
 export default useSort;
