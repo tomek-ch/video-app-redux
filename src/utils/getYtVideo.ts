@@ -29,12 +29,16 @@ async function getYtVideo(text: string) {
     return null;
   }
 
+  const { thumbnails } = video.snippet;
   const data = {
     id: video.id,
     title: video.snippet.title,
     views: video.statistics.viewCount,
     likes: video.statistics.likeCount,
-    thumbnail: video.snippet.thumbnails.standard.url,
+    thumbnail:
+      thumbnails?.standard.url ||
+      thumbnails?.high.url ||
+      thumbnails?.default.url,
     timestamp: Date.now(),
     favorite: false,
   };
