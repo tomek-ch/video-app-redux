@@ -72,7 +72,7 @@ function useVideos() {
 
     // Go back a page if it's the last video
     // from the current page being deleted
-    if (currentPageVideos.length === 1) {
+    if (currentPageVideos.length === 1 && pagesCount > 1) {
       setCurrentPage((prev) => prev - 1);
     }
   };
