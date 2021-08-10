@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Dropdown,
   DropdownItem,
@@ -8,6 +7,7 @@ import {
   Label,
 } from "reactstrap";
 import { useVideosContext } from "../context/VideosContext";
+import useToggle from "../hooks/useToggle";
 
 function Header() {
   const {
@@ -20,14 +20,13 @@ function Header() {
     isGrid,
     toggleGrid,
   } = useVideosContext();
-  const [dropdownOpen, setDropDownOpen] = useState(false);
-  const toggle = () => setDropDownOpen((prev) => !prev);
+  const [dropdownOpen, toggleDropdown] = useToggle();
 
   return (
     <header className="d-flex align-items-center justify-content-between my-3">
       <h1>Video App</h1>
       <nav>
-        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+        <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
           <DropdownToggle caret className="ms-auto">
             Menu
           </DropdownToggle>

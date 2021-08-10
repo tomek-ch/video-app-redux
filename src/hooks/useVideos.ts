@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Video from "../types/video";
 import demoVideos from "../utils/demoVideos";
 import getVideos from "../utils/vidsFromArray";
+import useToggle from "./useToggle";
 
 function useVideos() {
   const [videos, setVideos] = useState<Video[]>([]);
@@ -64,8 +65,8 @@ function useVideos() {
 
   // *** Filter and sort ***
 
-  const [favoritesOnly, setFavoritesOnly] = useState(false);
-  const [oldestFirst, setOldestFirst] = useState(false);
+  const [favoritesOnly, toggleFavoritesOnly] = useToggle();
+  const [oldestFirst, toggleOldestFirst] = useToggle();
 
   const listToDisplay = favoritesOnly
     ? videos.filter(({ favorite }) => favorite)
@@ -86,17 +87,14 @@ function useVideos() {
     currentPage * VIDS_PER_PAGE + VIDS_PER_PAGE
   );
 
-  // Togglers
   const toggleFavFilter = () => {
-    setFavoritesOnly((prev) => !prev);
+    toggleFavoritesOnly();
     setCurrentPage(0);
   };
-  const toggleOldestFirst = () => setOldestFirst((prev) => !prev);
 
   // *** Layout ***
 
-  const [isGrid, setIsGrid] = useState(false);
-  const toggleGrid = () => setIsGrid((prev) => !prev);
+  const [isGrid, toggleGrid] = useToggle();
 
   return {
     videos: currentPageVideos,

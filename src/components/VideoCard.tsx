@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { Card, Col, Row } from "reactstrap";
+import useToggle from "../hooks/useToggle";
 import Video from "../types/video";
 import VideoDetails from "./VideoDetail";
 import VideoModal from "./VideoModal";
@@ -9,8 +9,7 @@ interface Props {
 }
 
 function VideoCard({ video }: Props) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const toggleModal = () => setIsModalOpen((prev) => !prev);
+  const [isModalOpen, toggleModal] = useToggle();
 
   return (
     <Card className="p-5 mb-5">
