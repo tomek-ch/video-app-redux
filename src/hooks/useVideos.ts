@@ -4,35 +4,19 @@ import demoVideos from "../utils/demoVideos";
 import getVideos from "../utils/vidsFromArray";
 import useLocalSync from "./useLocalSync";
 import useToggle from "./useToggle";
+import useFilter from "./useFilter";
+import useSort from "./useSort";
 
 function useVideos() {
   const [videos, setVideos] = useState<Video[]>([]);
 
   useLocalSync({ videos, setVideos });
 
-  useEffect(() => {
-    const vids = videos.map(({ id, favorite, timestamp }) => ({
-      id,
-      favorite,
-      timestamp,
-    }));
-    const data = JSON.stringify(vids);
-    localStorage.setItem("videos", data);
-  }, [videos]);
-
   // *** Filter and sort ***
 
-  const [favoritesOnly, toggleFavoritesOnly] = useToggle();
-  const [oldestFirst, toggleOldestFirst] = useToggle();
-
-  const listToDisplay = favoritesOnly
-    ? videos.filter(({ favorite }) => favorite)
-    : // Spread to prevent mutation of state by sort()
-      [...videos];
-
-  if (oldestFirst) {
-    listToDisplay.sort((a, b) => a.timestamp - b.timestamp);
-  }
+  const { listToDisplay, favoritesOnly, toggleFavoritesOnly } = useSort(videos);
+  const { oldestFirst, toggleOldestFirst } = useFilter(listToDisplay);
+  //
 
   // *** Pagination ***
 
