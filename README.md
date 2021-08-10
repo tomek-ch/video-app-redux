@@ -17,8 +17,9 @@ yarn
 To run the app you need to create a `.env` file with YouTube and Vimeo API keys in the root directory:
 
 ```
-REACT_APP_YT_API_KEY=<your youtube api key>
-REACT_APP_VIMEO_API_KEY=<your vimeo api key>
+touch .env
+echo "REACT_APP_YT_API_KEY=<your youtube api key>" >> .env
+echo "REACT_APP_VIMEO_API_KEY=<your vimeo api key>" >> .env
 ```
 
 Note that, in order for Vimeo view counts to be displayed, your API key needs appropriate scopes, as explained [here](https://github.com/vimeo/vimeo.php/issues/209#issuecomment-617482744).
