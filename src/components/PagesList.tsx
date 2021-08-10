@@ -26,10 +26,10 @@ function PagesList() {
     <div className="d-flex justify-content-center">
       <Pagination aria-label="Videos list">
         <PaginationItem>
-          <PaginationLink first onClick={() => setPage(0)} />
+          <PaginationLink onClick={() => setPage(0)}>«</PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink previous onClick={goToPrevPage} />
+          <PaginationLink onClick={goToPrevPage}>‹</PaginationLink>
         </PaginationItem>
         {[...Array(pagesCount).keys()].map((page) => (
           <PaginationItem key={`page-${page}`} active={currentPage === page}>
@@ -39,10 +39,12 @@ function PagesList() {
           </PaginationItem>
         ))}
         <PaginationItem>
-          <PaginationLink next onClick={goToNextPage} />
+          <PaginationLink onClick={goToNextPage}>›</PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink last onClick={() => setPage(pagesCount - 1)} />
+          <PaginationLink onClick={() => setPage(pagesCount - 1)}>
+            »
+          </PaginationLink>
         </PaginationItem>
       </Pagination>
     </div>
