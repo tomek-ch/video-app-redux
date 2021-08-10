@@ -6,28 +6,23 @@ import useLocalSync from "./useLocalSync";
 import useToggle from "./useToggle";
 import useFilter from "./useFilter";
 import useSort from "./useSort";
+import usePagination from "./usePagination";
 
 function useVideos() {
   const [videos, setVideos] = useState<Video[]>([]);
 
+  // Local sync
   useLocalSync({ videos, setVideos });
 
-  // *** Filter and sort ***
-
+  // Sort
   const { listToDisplay, favoritesOnly, toggleFavoritesOnly } = useSort(videos);
+
+  // Filter
   const { oldestFirst, toggleOldestFirst } = useFilter(listToDisplay);
-  //
 
-  // *** Pagination ***
-
-  const VIDS_PER_PAGE = 6;
-  const pagesCount = Math.ceil(listToDisplay.length / VIDS_PER_PAGE);
-  const [currentPage, setCurrentPage] = useState(0);
-
-  const currentPageVideos = listToDisplay.slice(
-    currentPage * VIDS_PER_PAGE,
-    currentPage * VIDS_PER_PAGE + VIDS_PER_PAGE
-  );
+  // Pagination
+  const { pagesCount, currentPage, currentPageVideos, setCurrentPage } =
+    usePagination(videos);
 
   const toggleFavFilter = () => {
     toggleFavoritesOnly();
