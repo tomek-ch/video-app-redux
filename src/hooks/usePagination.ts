@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Video from "../types/video";
-import useToggle from "./useToggle";
 
 function usePagination(list: Video[]) {
   const VIDS_PER_PAGE = 6;
