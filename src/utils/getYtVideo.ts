@@ -24,7 +24,6 @@ async function getYtVideo(text: string) {
   }
 
   const { thumbnails } = video.snippet;
-  console.log(thumbnails);
   const data = {
     id: video.id,
     title: video.snippet.title,
