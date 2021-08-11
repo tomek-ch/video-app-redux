@@ -3,10 +3,10 @@ import Video from "../types/video";
 import demoVideos from "../utils/demoVideos";
 import getVideos from "../utils/vidsFromArray";
 import useCrud from "./useCrud";
-import useFilter from "./useFilter";
+import useSort from "./useFilter";
 import useLocalSync from "./useLocalSync";
 import usePagination from "./usePagination";
-import useSort from "./useSort";
+import useFilter from "./useSort";
 import useToggle from "./useToggle";
 
 function useVideos() {
@@ -16,14 +16,14 @@ function useVideos() {
   useLocalSync({ videos, setVideos });
 
   // Sort
-  const { sorted, favoritesOnly, toggleFavoritesOnly } = useSort(videos);
+  const { filtered, favoritesOnly, toggleFavoritesOnly } = useSort(videos);
 
   // Filter
-  const { filtered, oldestFirst, toggleOldestFirst } = useFilter(sorted);
+  const { sorted, oldestFirst, toggleOldestFirst } = useFilter(filtered);
 
   // Pagination
   const { pagesCount, currentPage, currentPageVideos, setCurrentPage } =
-    usePagination(filtered);
+    usePagination(sorted);
 
   const toggleFavFilter = () => {
     toggleFavoritesOnly();

@@ -1,13 +1,15 @@
 import Video from "../types/video";
 import useToggle from "./useToggle";
 
-function useFilter(list: Video[]) {
-  const [oldestFirst, toggleOldestFirst] = useToggle();
-  const filtered = oldestFirst
-    ? list.sort((a, b) => a.timestamp - b.timestamp)
-    : list;
+function useFilter(videos: Video[]) {
+  const [favoritesOnly, toggleFavoritesOnly] = useToggle();
 
-  return { filtered, oldestFirst, toggleOldestFirst };
+  const filtered = favoritesOnly
+    ? videos.filter(({ favorite }) => favorite)
+    : // Spread to prevent mutation of state by sort()
+      [...videos];
+
+  return { filtered, favoritesOnly, toggleFavoritesOnly };
 }
 
 export default useFilter;
