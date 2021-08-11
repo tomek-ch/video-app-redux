@@ -1,3 +1,5 @@
+import makeReq from "./makeRequest";
+
 function getId(str: string) {
   return (
     str.match(
@@ -6,24 +8,16 @@ function getId(str: string) {
   );
 }
 
-async function fetchFromYt(id: string) {
+function fetchFromYt(id: string) {
   const key = process.env.REACT_APP_YT_API_KEY;
   const url = `https://www.googleapis.com/youtube/v3/videos?id=${id}&key=${key}&part=snippet,statistics`;
-
-  try {
-    const response = await fetch(url);
-    if (response.ok) {
-      const data = await response.json();
-      return data.items[0];
-    }
-  } catch (e) {
-    return null;
-  }
+  return makeReq(url);
 }
 
 async function getYtVideo(text: string) {
   const id = getId(text);
-  const video = await fetchFromYt(id);
+  const results = await fetchFromYt(id);
+  const video = results?.items?.[0];
 
   if (!video) {
     return null;

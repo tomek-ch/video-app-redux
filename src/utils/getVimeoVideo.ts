@@ -1,15 +1,9 @@
+import makeReq from "./makeRequest";
+
 async function fetchFromVimeo(id: string) {
   const key = process.env.REACT_APP_VIMEO_API_KEY;
   const url = `https://api.vimeo.com/videos/${id}?access_token=${key}`;
-
-  try {
-    const response = await fetch(url);
-    if (response.ok) {
-      return await response.json();
-    }
-  } catch (e) {
-    return null;
-  }
+  return makeReq(url);
 }
 
 async function getVimeoVideo(id: string) {
