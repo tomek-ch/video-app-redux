@@ -6,8 +6,7 @@ function useFilter(videos: Video[]) {
 
   const filtered = favoritesOnly
     ? videos.filter(({ favorite }) => favorite)
-    : // Spread to prevent mutation of state by sort()
-      [...videos];
+    : videos;
 
   return { filtered, favoritesOnly, toggleFavoritesOnly };
 }
