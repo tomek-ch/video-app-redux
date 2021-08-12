@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Video from "../types/video";
 
 function usePagination(list: Video[]) {
@@ -10,6 +10,12 @@ function usePagination(list: Video[]) {
     currentPage * VIDS_PER_PAGE,
     currentPage * VIDS_PER_PAGE + VIDS_PER_PAGE
   );
+
+  useEffect(() => {
+    if (currentPage && !currentPageVideos.length) {
+      setCurrentPage((prev) => prev - 1);
+    }
+  }, [currentPageVideos, pagesCount, currentPage]);
 
   return { pagesCount, currentPage, currentPageVideos, setCurrentPage };
 }

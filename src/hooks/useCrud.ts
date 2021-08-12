@@ -3,7 +3,6 @@ import Video from "../types/video";
 interface Args {
   videos: Video[];
   setVideos: React.Dispatch<React.SetStateAction<Video[]>>;
-  handleRemove: () => void;
 }
 
 function useCrud({ videos, setVideos }: Args) {
