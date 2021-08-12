@@ -1,5 +1,3 @@
-import { useState } from "react";
-import Video from "../types/video";
 import demoVideos from "../utils/demoVideos";
 import getVideos from "../utils/vidsFromArray";
 import useCrud from "./useCrud";
@@ -10,7 +8,9 @@ import useFilter from "./useSort";
 import useToggle from "./useToggle";
 
 function useVideos() {
-  const [videos, setVideos] = useState<Video[]>([]);
+  // CRUD
+  const { videos, setVideos, addVideo, removeVideo, toggleFavorite } =
+    useCrud();
 
   // Local sync
   useLocalSync({ videos, setVideos });
@@ -30,23 +30,14 @@ function useVideos() {
     setCurrentPage(0);
   };
 
-  // CRUD
-  const { addVideo, removeVideo, toggleFavorite } = useCrud({
-    videos,
-    setVideos,
-  });
-
   // Wipe and load data
-
   const loadDemoData = async () => {
     const videos = await getVideos(demoVideos);
     setVideos(videos);
   };
-
   const wipeData = () => setVideos([]);
 
   // Layout
-
   const [isGrid, toggleGrid] = useToggle();
 
   return {

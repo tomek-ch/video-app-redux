@@ -1,11 +1,9 @@
+import { useState } from "react";
 import Video from "../types/video";
 
-interface Args {
-  videos: Video[];
-  setVideos: React.Dispatch<React.SetStateAction<Video[]>>;
-}
+function useCrud() {
+  const [videos, setVideos] = useState<Video[]>([]);
 
-function useCrud({ videos, setVideos }: Args) {
   const addVideo = (newVid: Video) => {
     const videoExists = videos.find(({ id }) => id === newVid.id);
     if (videoExists) {
@@ -33,7 +31,7 @@ function useCrud({ videos, setVideos }: Args) {
     );
   };
 
-  return { addVideo, removeVideo, toggleFavorite };
+  return { videos, setVideos, addVideo, removeVideo, toggleFavorite };
 }
 
 export default useCrud;
