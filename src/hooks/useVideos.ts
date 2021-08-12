@@ -31,10 +31,7 @@ function useVideos() {
   };
 
   // Wipe and load data
-  const loadDemoData = async () => {
-    const videos = await getVideos(demoVideos);
-    setVideos(videos);
-  };
+  const loadDemoData = async () => setVideos(await getVideos(demoVideos));
   const wipeData = () => setVideos([]);
 
   // Layout
