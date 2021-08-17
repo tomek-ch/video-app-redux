@@ -1,14 +1,11 @@
-import getVimeoVideo from "./getVimeoVideo";
-import getYtVideo from "./getYtVideo";
-
-async function getVideo(text: string) {
-  const vimeoId = text.match(/\d{9}/)?.[0];
-
-  if (!vimeoId) {
-    return await getYtVideo(text);
+async function getVideo(query: string) {
+  const api = process.env.REACT_APP_API_URL;
+  try {
+    const result = await fetch(`${api}/video?q=${query}`);
+    return result.json();
+  } catch {
+    return null;
   }
-
-  return await getVimeoVideo(vimeoId);
 }
 
 export default getVideo;
