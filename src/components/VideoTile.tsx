@@ -10,7 +10,7 @@ interface Props {
 function VideoTile({ video }: Props) {
   const [isModalOpen, toggleModal] = useToggle();
   return (
-    <Col xs={4} className="mb-4">
+    <Col xs={6} sm={4} className="mb-4">
       <VideoModal {...{ video, isModalOpen, toggleModal }} />
     </Col>
   );
