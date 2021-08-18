@@ -17,7 +17,12 @@ function VideoModal({
 }: Props) {
   return (
     <div>
-      <CardImg onClick={toggleModal} src={thumbnail} alt="Video thumbnail" />
+      <CardImg
+        onClick={toggleModal}
+        src={thumbnail}
+        alt="Video thumbnail"
+        role="button"
+      />
       <Modal isOpen={isModalOpen} toggle={toggleModal} size="xl">
         <ModalBody>
           <div className="ratio ratio-16x9">
