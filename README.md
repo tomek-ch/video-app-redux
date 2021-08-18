@@ -15,7 +15,7 @@ Save and manage videos from YouTube and Vimeo. Try it out [here](https://hopeful
 
 ### About the app
 
-This is a refactor of my [last project](https://github.com/tomek-ch/video-app). It uses Redux for state management and only uses React State for local component state - form data and modal toggles. Redux Thunk is used for handling asynchronous logic.
+This is a refactor of my [last project](https://github.com/tomek-ch/video-app). It uses Redux for state management and only uses React state for local component state - modal toggles. Redux Thunk is used for handling asynchronous logic.
 
 Instead of relying on environment variables for storing API keys, and handling all the video fetching logic client-side, the app is connected to a [Node.js API](https://github.com/tomek-ch/video-api) that I have created. This allows for deployment of the app without compromising sensitive data.
 

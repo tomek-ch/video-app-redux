@@ -10,6 +10,7 @@ interface Store {
     error: boolean;
     message: string;
   };
+  query: string;
 }
 
 export default Store;

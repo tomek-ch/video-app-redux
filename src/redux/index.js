@@ -7,6 +7,7 @@ import sortByOldest from "./sortByOldest";
 import currentPage from "./currentPage";
 import isGrid from "./isGrid";
 import alert from "./alert";
+import query from "./query";
 
 const rootReducer = combineReducers({
   videos,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   currentPage,
   isGrid,
   alert,
+  query,
 });
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
