@@ -41,7 +41,7 @@ function Header() {
               Load demo videos
             </DropdownItem>
             <DropdownItem divider />
-            <Label check className="px-3 py-1">
+            <Label check className="dropdown-item">
               <Input
                 type="checkbox"
                 checked={favFilter}
@@ -50,7 +50,7 @@ function Header() {
               />
               Favorites only
             </Label>
-            <Label check className="px-3 py-1">
+            <Label check className="dropdown-item">
               <Input
                 type="checkbox"
                 checked={sortByOldest}
@@ -59,7 +59,7 @@ function Header() {
               />
               Oldest first
             </Label>
-            <Label check className="px-3 py-1">
+            <Label check className="dropdown-item">
               <Input
                 type="checkbox"
                 checked={isGrid}
