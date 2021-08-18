@@ -1,8 +1,8 @@
 interface Video {
   id: string;
   title: string;
-  views: string | null;
-  likes: string | number;
+  views: number | null;
+  likes: number;
   thumbnail: string;
   timestamp: number;
   favorite: boolean;
