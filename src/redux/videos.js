@@ -1,7 +1,7 @@
 import getVideos from "../utils/vidsFromArray";
 import getVideo from "../utils/getVideo";
 
-export const addVideo = (query) => async (dispatch, getState) => {
+export const addVideo = (query, timestamp) => async (dispatch, getState) => {
   const video = await getVideo(query);
 
   if (!video) {
@@ -18,7 +18,11 @@ export const addVideo = (query) => async (dispatch, getState) => {
   if (!videoExists) {
     dispatch({
       type: "VIDEO_ADD_SUCCESS",
-      payload: video,
+      payload: {
+        ...video,
+        timestamp,
+        favorite: false,
+      },
     });
     return;
   }

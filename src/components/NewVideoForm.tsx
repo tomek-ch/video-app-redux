@@ -14,7 +14,7 @@ function NewVideoForm() {
       className="top"
       onSubmit={async (e) => {
         e.preventDefault();
-        dispatch(addVideo(text));
+        dispatch(addVideo(text, Date.now()));
       }}
     >
       <Label for="video">Video url or id</Label>
