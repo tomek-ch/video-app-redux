@@ -20,8 +20,8 @@ function VideoDetails({
   return (
     <>
       <h2>{title}</h2>
-      <p>Views: {views ?? "Not available"}</p>
-      <p>Likes: {likes}</p>
+      <p>Views: {views?.toLocaleString() ?? "Not available"}</p>
+      <p>Likes: {likes.toLocaleString()}</p>
       <p>Added: {formatDate(timestamp)}</p>
       <Label>
         <Input
