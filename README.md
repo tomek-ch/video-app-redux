@@ -23,7 +23,7 @@ Instead of relying on environment variables for storing API keys, and handling a
 
 #### API setup
 
-To run the app on your own machine, you first need to set up the API. Follow the instructions in the [readme](https://github.com/tomek-ch/video-api#readme.md) and use `http://localhost:3000` as the client url. Note that YouTube and Vimeo API keys are required.
+To run the app on your own machine, you first need to set up the API. Follow the instructions in the [readme](https://github.com/tomek-ch/video-api#readme) and use `http://localhost:3000` as the client url. Note that YouTube and Vimeo API keys are required.
 
 #### Installation
 
