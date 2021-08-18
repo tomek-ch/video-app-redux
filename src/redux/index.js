@@ -21,14 +21,15 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 store.subscribe(() => {
-  const vids = store.getState().videos.map(({ id, favorite, timestamp }) => ({
+  const { videos } = store.getState();
+
+  const videoData = videos.map(({ id, favorite, timestamp }) => ({
     id,
     favorite,
     timestamp,
   }));
 
-  const data = JSON.stringify(vids);
-  localStorage.setItem("videos", data);
+  localStorage.setItem("videos", JSON.stringify(videoData));
 });
 
 export default store;
