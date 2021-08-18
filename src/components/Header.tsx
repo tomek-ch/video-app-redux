@@ -25,6 +25,11 @@ function Header() {
   const sortByOldest = useSortByOldestSelector();
   const isGrid = useIsGridSelector();
 
+  const handleChange = (action: object) => {
+    dispatch(action);
+    toggleDropdown();
+  };
+
   return (
     <header className="d-flex align-items-center justify-content-between my-3 top">
       <h1>Video App</h1>
@@ -45,7 +50,7 @@ function Header() {
               <Input
                 type="checkbox"
                 checked={favFilter}
-                onChange={() => dispatch(toggleFavFilter())}
+                onChange={() => handleChange(toggleFavFilter())}
                 className="me-1"
               />
               Favorites only
@@ -54,7 +59,7 @@ function Header() {
               <Input
                 type="checkbox"
                 checked={sortByOldest}
-                onChange={() => dispatch(toggleSortByOldest())}
+                onChange={() => handleChange(toggleSortByOldest())}
                 className="me-1"
               />
               Oldest first
@@ -63,7 +68,7 @@ function Header() {
               <Input
                 type="checkbox"
                 checked={isGrid}
-                onChange={() => dispatch(toggleIsGrid())}
+                onChange={() => handleChange(toggleIsGrid())}
                 className="me-1"
               />
               Grid view
