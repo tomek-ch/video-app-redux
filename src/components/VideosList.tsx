@@ -1,15 +1,27 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Row } from "reactstrap";
-import { useVideosContext } from "../context/VideosContext";
+import useIsGridSelector from "../hooks/useIsGridSelector";
+import usePaginationSelector from "../hooks/usePaginationSelector";
+import { goToPage } from "../redux/currentPage";
 import VideoCard from "./VideoCard";
 import VideoTile from "./VideoTile";
 
 function VideosList() {
-  const { videos, isGrid } = useVideosContext();
+  const { currentPageVideos, pageCount, currentPage } = usePaginationSelector();
+  const isGrid = useIsGridSelector();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (currentPage && !currentPageVideos.length) {
+      dispatch(goToPage(currentPage - 1));
+    }
+  }, [currentPageVideos, pageCount, currentPage, dispatch]);
 
   if (isGrid) {
     return (
       <Row>
-        {videos.map((vid) => (
+        {currentPageVideos.map((vid) => (
           <VideoTile key={vid.id} video={vid} />
         ))}
       </Row>
@@ -18,7 +30,7 @@ function VideosList() {
 
   return (
     <div>
-      {videos.map((vid) => (
+      {currentPageVideos.map((vid) => (
         <VideoCard key={vid.id} video={vid} />
       ))}
     </div>

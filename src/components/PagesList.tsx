@@ -1,16 +1,19 @@
+import { useDispatch } from "react-redux";
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
-import { useVideosContext } from "../context/VideosContext";
+import usePaginationSelector from "../hooks/usePaginationSelector";
+import { goToPage } from "../redux/currentPage";
 
 function PagesList() {
-  const { pagesCount, setCurrentPage, currentPage } = useVideosContext();
+  const dispatch = useDispatch();
+  const { pageCount, currentPage } = usePaginationSelector();
 
-  if (pagesCount < 2) {
+  if (pageCount < 2) {
     return null;
   }
 
   const setPage = (page: number) => {
     if (currentPage !== page) {
-      setCurrentPage(page);
+      dispatch(goToPage(page));
       window.scrollTo(0, 0);
     }
   };
@@ -22,7 +25,7 @@ function PagesList() {
   };
 
   const goToNextPage = () => {
-    if (currentPage + 1 !== pagesCount) {
+    if (currentPage + 1 !== pageCount) {
       setPage(currentPage + 1);
     }
   };
@@ -36,7 +39,7 @@ function PagesList() {
         <PaginationItem>
           <PaginationLink onClick={goToPrevPage}>‹</PaginationLink>
         </PaginationItem>
-        {[...Array(pagesCount).keys()].map((page) => (
+        {[...Array(pageCount).keys()].map((page) => (
           <PaginationItem key={`page-${page}`} active={currentPage === page}>
             <PaginationLink onClick={() => setPage(page)}>
               {page + 1}
@@ -47,7 +50,7 @@ function PagesList() {
           <PaginationLink onClick={goToNextPage}>›</PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink onClick={() => setPage(pagesCount - 1)}>
+          <PaginationLink onClick={() => setPage(pageCount - 1)}>
             »
           </PaginationLink>
         </PaginationItem>

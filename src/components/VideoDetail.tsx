@@ -1,5 +1,6 @@
+import { useDispatch } from "react-redux";
 import { Label, Input, Button } from "reactstrap";
-import { useVideosContext } from "../context/VideosContext";
+import { removeVideo, toggleFavorite } from "../redux/videos";
 import Video from "../types/video";
 import formatDate from "../utils/formatDate";
 
@@ -14,7 +15,7 @@ function VideoDetails({
   isModal,
   toggleModal,
 }: Props) {
-  const { toggleFavorite, removeVideo } = useVideosContext();
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -26,7 +27,7 @@ function VideoDetails({
         <Input
           type="checkbox"
           checked={favorite}
-          onChange={() => toggleFavorite(id)}
+          onChange={() => dispatch(toggleFavorite(id))}
           className="mb-4 me-1"
         />
         Favorite
@@ -35,7 +36,7 @@ function VideoDetails({
         <Button onClick={toggleModal} color="primary" className="me-2">
           {isModal ? "Close" : "Watch"}
         </Button>
-        <Button onClick={() => removeVideo(id)} color="danger">
+        <Button onClick={() => dispatch(removeVideo(id))} color="danger">
           Delete
         </Button>
       </div>

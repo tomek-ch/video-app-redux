@@ -1,35 +1,20 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Alert, Button, Form, Input, Label } from "reactstrap";
-import { useVideosContext } from "../context/VideosContext";
-import getVideo from "../utils/getVideo";
+import useAlertSelector from "../hooks/useAlertSelector";
+import { addVideo } from "../redux/videos";
 
 function NewVideoForm() {
   const [text, setText] = useState("");
-  const [error, setError] = useState("");
-  const [isSuccessful, setIsSuccessful] = useState(false);
-  const { addVideo } = useVideosContext();
+  const dispatch = useDispatch();
+  const { error, message } = useAlertSelector();
 
   return (
     <Form
       className="top"
       onSubmit={async (e) => {
         e.preventDefault();
-        const video = await getVideo(text);
-
-        if (!video) {
-          setError("Could not find that video");
-          return;
-        }
-
-        const addedSuccessfully = addVideo(video);
-        if (addedSuccessfully) {
-          setIsSuccessful(true);
-          setError("");
-          setText("");
-          return;
-        }
-
-        setError("Video already in library");
+        dispatch(addVideo(text));
       }}
     >
       <Label for="video">Video url or id</Label>
@@ -45,8 +30,7 @@ function NewVideoForm() {
           Add
         </Button>
       </div>
-      {error && <Alert color="danger">{error}</Alert>}
-      {isSuccessful && <Alert color="success">Video added successfully</Alert>}
+      {message && <Alert color={error ? "danger" : "success"}>{message}</Alert>}
     </Form>
   );
 }

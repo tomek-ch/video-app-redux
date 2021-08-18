@@ -1,3 +1,4 @@
+import { useDispatch } from "react-redux";
 import {
   Dropdown,
   DropdownItem,
@@ -6,21 +7,23 @@ import {
   Input,
   Label,
 } from "reactstrap";
-import { useVideosContext } from "../context/VideosContext";
+import useIsGridSelector from "../hooks/useIsGridSelector";
+import useFavFilterSelector from "../hooks/useFavFilterSelector";
+import useSortByOldestSelector from "../hooks/useSortByOldestSelector";
 import useToggle from "../hooks/useToggle";
+import { toggleFavFilter } from "../redux/favFilter";
+import { toggleIsGrid } from "../redux/isGrid";
+import { toggleSortByOldest } from "../redux/sortByOldest";
+import { loadVideos, wipeData } from "../redux/videos";
+import demoVideos from "../utils/demoVideos";
 
 function Header() {
-  const {
-    loadDemoData,
-    wipeData,
-    favoritesOnly,
-    toggleFavFilter,
-    toggleOldestFirst,
-    oldestFirst,
-    isGrid,
-    toggleGrid,
-  } = useVideosContext();
   const [dropdownOpen, toggleDropdown] = useToggle();
+  const dispatch = useDispatch();
+
+  const favFilter = useFavFilterSelector();
+  const sortByOldest = useSortByOldestSelector();
+  const isGrid = useIsGridSelector();
 
   return (
     <header className="d-flex align-items-center justify-content-between my-3 top">
@@ -31,14 +34,18 @@ function Header() {
             Menu
           </DropdownToggle>
           <DropdownMenu className="mt-1" right>
-            <DropdownItem onClick={wipeData}>Delete all videos</DropdownItem>
-            <DropdownItem onClick={loadDemoData}>Load demo videos</DropdownItem>
+            <DropdownItem onClick={() => dispatch(wipeData())}>
+              Delete all videos
+            </DropdownItem>
+            <DropdownItem onClick={() => dispatch(loadVideos(demoVideos))}>
+              Load demo videos
+            </DropdownItem>
             <DropdownItem divider />
             <Label check className="px-3 py-1">
               <Input
                 type="checkbox"
-                checked={favoritesOnly}
-                onChange={toggleFavFilter}
+                checked={favFilter}
+                onChange={() => dispatch(toggleFavFilter())}
                 className="me-1"
               />
               Favorites only
@@ -46,8 +53,8 @@ function Header() {
             <Label check className="px-3 py-1">
               <Input
                 type="checkbox"
-                checked={oldestFirst}
-                onChange={toggleOldestFirst}
+                checked={sortByOldest}
+                onChange={() => dispatch(toggleSortByOldest())}
                 className="me-1"
               />
               Oldest first
@@ -56,7 +63,7 @@ function Header() {
               <Input
                 type="checkbox"
                 checked={isGrid}
-                onChange={toggleGrid}
+                onChange={() => dispatch(toggleIsGrid())}
                 className="me-1"
               />
               Grid view

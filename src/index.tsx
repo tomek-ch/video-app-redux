@@ -2,11 +2,12 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
-import { VideosContextProvider } from "./context/VideosContext";
+import { Provider } from "react-redux";
+import store from "./redux";
 
 ReactDOM.render(
-  <VideosContextProvider>
+  <Provider store={store}>
     <App />
-  </VideosContextProvider>,
+  </Provider>,
   document.getElementById("root")
 );
